@@ -9,7 +9,7 @@ function Nav() {
             <a href="/"><FaCannabis className='ml-4 size-16 text-white' /></a>
             <ul className='flex mr-20'>
                 <li><a className='mr-10 text-white text-xl font-sans' href="#">How to use</a></li>
-                <li><a className='text-white text-xl font-sans' href="#">Teams</a></li>
+                <li><a className='text-white text-xl font-sans' href="#">Teamss</a></li>
             </ul>
         </nav>
     </div>
