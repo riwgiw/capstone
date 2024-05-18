@@ -1,0 +1,5 @@
+.bg-custom {
+    background-image: url('./bg-G.jpg'); /* เปลี่ยน URL นี้เป็น URL ของรูปภาพที่คุณต้องการใช้ */
+    background-size: cover;
+ 
+}
