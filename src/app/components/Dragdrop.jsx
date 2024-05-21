@@ -4,6 +4,9 @@ import React , { useEffect , useCallback , useState } from 'react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { FaXmark , FaRobot , FaUserTie , FaRegThumbsUp , FaRegThumbsDown , FaCheck } from "react-icons/fa6";
+import { Container } from 'postcss';
+import Cardcontainer from './Cardcontainer';
+
 
 var axios = require('axios');
 
@@ -168,16 +171,17 @@ function Dragdrop({className}) {
     };
 
 
-
+    // className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-[30px]"
   
   
   return (
     
     <>
-      <form onSubmit={handleSubmit} method='post' className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-[30px]" >
+    <div className='flex justify-center items-center flex-col w-screen'>
+      <form onSubmit={handleSubmit} method='post' className="flex flex-col " >
 
       <div className="max-w-[1000px]">
-        <h1 className='text-5xl font-bold'>Upload Files</h1>
+        <div className='flex justify-center font-sans text-xl '>Upload your imges</div>
         {/* Upload files */}
         <div 
             {...getRootProps({
@@ -253,7 +257,7 @@ function Dragdrop({className}) {
         </h3>
         <ul className='mt-6 flex flex-col'>
           {rejected.map(({ file, errors }) => (
-            <li key={file.name} className='flex items-start justify-between'>
+            <li key={file.name} className='flex items-start justify-between w-20'>
               <div>
                 <p className='mt-2 text-neutral-500 text-sm font-medium'>
                   {file.name}
@@ -276,7 +280,7 @@ function Dragdrop({className}) {
         </ul>
       </div>
 
-      <div className='p-[20px] h-[570px] w-full bg-slate-700 rounded-xl flex justify-center items-center'>
+      <div className='p-[20px] h-[500px] w-[550px] bg-slate-700 rounded-xl flex justify-center items-center'>
         <div className="flex flex-col w-full h-full">
           <div className="flex justify-center items-center h-1/2 bg-slate-800 rounded-[8px]">
             {submit ? 
@@ -342,11 +346,27 @@ function Dragdrop({className}) {
         <p className="text-white font-semibold text-xl">Loading...</p>
       </div>}  
       </form>
-      <div>
-        <footer className="fixed bottom-0 left-0 w-full bg-gray-800 text-white text-center py-2">
-            Footer
-        </footer>
-        </div>
+      <div className='flex justify-center font-sans text-xl mt-10'>
+        try ai or not
+      </div>
+      <div className="flex items-center justify-start m-10 gap-6 flex-wrap  max-w-[70vw] pl-14 ">
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+        <Cardcontainer/>
+      </div>
+      <footer className=" relative top-10 bg-gray-800 text-white text-center py-2 h-32 w-screen flex items-center justify-center ">
+        MINIMAL FOOTER
+      </footer>
+      </div>
+
+     
+      
     </>
     
   )
