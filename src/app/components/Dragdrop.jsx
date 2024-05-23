@@ -98,7 +98,7 @@ function Dragdrop({className}) {
           maxBodyLength: Infinity,
           url: 'https://api.aiornot.com/v1/reports/image',
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzY0NmQ4LWEzMWQtNDYzOS04MWU1LWJlODFiN2NhNzk4OSIsInVzZXJfaWQiOiI2Mjc2NDZkOC1hMzFkLTQ2MzktODFlNS1iZTgxYjdjYTc5ODkiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjAuMH0.uztEF4J5k9TJ5bFdXDkZnDg8XwHZIzLKh_tnWXzwF1o',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdkMjc0M2EzLTc4NmItNDdhYS04NTg0LTMwZTU5ZGY3NGQ2MSIsInVzZXJfaWQiOiI3ZDI3NDNhMy03ODZiLTQ3YWEtODU4NC0zMGU1OWRmNzRkNjEiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjAuMH0.g84Y1ffU14iw1QWgP-alYYxRHZvuUOvSPIl3d052mLU',
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
@@ -107,7 +107,7 @@ function Dragdrop({className}) {
     
         const aiResponse = await axios(config);
         const responseData = aiResponse.data;
-    
+        console.log(responseData)
         setVerdict(responseData.report.verdict);
         setQuality(responseData.facets.quality.is_detected);
         setNsfw(responseData.facets.nsfw.is_detected);
@@ -122,49 +122,7 @@ function Dragdrop({className}) {
         setLoading(false); // Set loading state to false after completion
       }
 
-      // const data = await fetch(URL, {
-      //   method: 'POST',
-      //   body: formData
-      // }).then(res => res.json());
-
-      // console.log('data', data.url)
-
-      // var imageInsert = JSON.stringify({
-      //   "object": data.url
-      // });
-
-      // var config = {
-      //   method: 'post',
-      // maxBodyLength: Infinity,
-      //   url: 'https://api.aiornot.com/v1/reports/image',
-      //   headers: { 
-      //     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzY0NmQ4LWEzMWQtNDYzOS04MWU1LWJlODFiN2NhNzk4OSIsInVzZXJfaWQiOiI2Mjc2NDZkOC1hMzFkLTQ2MzktODFlNS1iZTgxYjdjYTc5ODkiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjAuMH0.uztEF4J5k9TJ5bFdXDkZnDg8XwHZIzLKh_tnWXzwF1o', 
-      //     'Content-Type': 'application/json', 
-      //     'Accept': 'application/json'
-      //   },
-      //   data : imageInsert
-      // };
-
-      // axios(config)
-      // .then(function (response) {
-        
-      //   setVerdict(response.data.report.verdict);
-      //   setQuality(response.data.facets.quality.is_detected);
-      //   setNsfw(response.data.facets.nsfw.is_detected);
-      //   setSubmit(true);
-      //   setLoading(false); // Stop loading
-      //   console.log(JSON.stringify(response.data));
-      //   console.log("Verdict" , response.data.report.verdict);
-      //   console.log("Quality :", response.data.facets.quality.is_detected)
-      //   console.log("Nsfw :", response.data.facets.nsfw.is_detected)
-      //   console.log(response.data);
-        
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      //   setLoading(false); // Stop loading on error
-      // });
-      
+     
     };
 
 
