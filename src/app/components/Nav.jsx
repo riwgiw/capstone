@@ -20,9 +20,7 @@ function Nav() {
           <div className='text-white text-3xl font-sans mb-4 m-10'>
             VERIFICATION WITH AI DETECTION
           </div>
-          <div className='m-6 text-white text-l font-sans border border-white rounded-3xl px-4 py-2'>
-            ADEIO
-          </div>
+          
         </div>
       </div>
      

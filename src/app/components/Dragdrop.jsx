@@ -126,15 +126,13 @@ function Dragdrop({ className }) {
     }
   };
 
-  // className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-[30px]"
-
   return (
     <>
       <div className="flex justify-center items-center flex-col w-screen">
-        <form onSubmit={handleSubmit} method="post" className="flex flex-col ">
-          <div className="max-w-[1000px]">
+        <form onSubmit={handleSubmit} method="post" className="flex flex-col lg:flex-row">
+          <div className="px-5 max-w-[1000px]">
             <div className="flex justify-center font-sans text-xl ">
-              Upload your imges
+              Upload your images
             </div>
             {/* Upload files */}
             <div
@@ -176,18 +174,18 @@ function Dragdrop({ className }) {
             <h3 className="title text-lg font-semibold text-neutral-600 mt-10 border-b pb-3">
               Accepted Files
             </h3>
-            {/* grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-10 */}
+            
             <ul className="mt-6 flex justify-center">
               {files.map((file) => (
                 <li
                   key={file.name}
-                  className="relative h-32 rounded-md shadow-lg"
+                  className="relative h-56 rounded-md shadow-lg mr-2"
                 >
                   <Image
                     src={file.preview}
                     alt={file.name}
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     onLoad={() => {
                       URL.revokeObjectURL(file.preview);
                     }}
@@ -239,7 +237,7 @@ function Dragdrop({ className }) {
             </ul>
           </div>
 
-          <div className="p-[20px] h-[500px] w-[550px] bg-slate-700 rounded-xl flex justify-center items-center">
+          <div className="mx-[20px] p-[20px] h-[500px] w-[550px] bg-slate-700 rounded-xl flex justify-center items-center">
             <div className="flex flex-col w-full h-full">
               <div className="flex justify-center items-center h-1/2 bg-slate-800 rounded-[8px]">
                 {submit ? (
@@ -308,7 +306,7 @@ function Dragdrop({ className }) {
           </div>
           {/* Loading Indicator */}
           {loading && (
-            <div className="absolute top-0 left-0 w-full h-full bg-gray-900 opacity-75 flex justify-center items-center">
+            <div className="absolute top-0 left-0 w-full h-lvh bg-gray-900 opacity-75 flex justify-center items-center">
               <p className="text-white font-semibold text-xl">Loading...</p>
             </div>
           )}
@@ -330,7 +328,7 @@ function Dragdrop({ className }) {
           </div>
         </div>
         <footer className=" relative top-10 bg-gray-800 text-white text-center py-2 h-32 w-screen flex items-center justify-center ">
-          MINIMAL FOOTER
+          Copyright 2024
         </footer>
       </div>
     </>
