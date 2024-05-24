@@ -5,7 +5,7 @@ import Login from './Login';
 function Nav() {
   return (
     <div>
-      <div className='w-full h-96 bg-custom bg-slate-800 bg-opacity-60 rounded-bl-[35px] rounded-br-[35px] p-7 pt-4 flex flex-col justify-between'>
+      <div className='max-w-full w-full h-96 bg-custom bg-slate-800 bg-opacity-60 rounded-bl-[35px] rounded-br-[35px] p-7 pt-4 flex flex-col justify-between'>
         <div className='flex justify-between items-center'>
           <div className='text-2xl text-white'>AIMAI</div>
           <div className='flex text-white text-xl font-sans'>

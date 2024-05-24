@@ -128,17 +128,20 @@ function Dragdrop({ className }) {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-screen">
-        <form onSubmit={handleSubmit} method="post" className="flex flex-col lg:flex-row">
-          <div className="px-5 max-w-[1000px]">
-            <div className="flex justify-center font-sans text-xl ">
+      <div className="flex justify-center items-center flex-col">
+        <form
+          onSubmit={handleSubmit}
+          method="post"
+          className="flex flex-col lg:flex-row max-w-[1000px] w-full"
+        >
+          <div className="px-3 w-full">
+            <div className="flex justify-center font-sans text-2xl font-bold">
               Upload your images
             </div>
             {/* Upload files */}
             <div
-              {...getRootProps({
-                className: className,
-              })}
+              className="mt-10 w-full h-[150px] border border-neutral-700 rounded-xl flex justify-center items-center"
+              {...getRootProps({})}
             >
               <input {...getInputProps()} name="file" />
               {isDragActive ? (
@@ -152,18 +155,18 @@ function Dragdrop({ className }) {
 
             {/* Preview */}
             <div className="mt-10">
-              <div className="flex gap-4">
-                <h2 className="title text-3xl font-semibold">Preview</h2>
+              <div className="flex w-full">
+                <h2 className="title text-3xl font-semibold mr-2">Preview</h2>
                 <button
                   type="button"
                   onClick={removeAll}
-                  className="mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-slate-300 transition-colors"
+                  className="mr-5 mt-1 text-[12px] uppercase font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-slate-300 transition-colors"
                 >
                   Remove all files
                 </button>
                 <button
                   type="submit"
-                  className="ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-slate-800 rounded-md px-3 hover:bg-slate-700 hover:text-white transition-colors"
+                  className="mt-1 text-[12px] uppercase font-bold text-neutral-500 border border-slate-800 rounded-md px-3 hover:bg-slate-700 hover:text-white transition-colors"
                 >
                   Check AI or Human
                 </button>
@@ -174,7 +177,7 @@ function Dragdrop({ className }) {
             <h3 className="title text-lg font-semibold text-neutral-600 mt-10 border-b pb-3">
               Accepted Files
             </h3>
-            
+
             <ul className="mt-6 flex justify-center">
               {files.map((file) => (
                 <li
@@ -236,74 +239,76 @@ function Dragdrop({ className }) {
               ))}
             </ul>
           </div>
-
-          <div className="mx-[20px] p-[20px] h-[500px] w-[550px] bg-slate-700 rounded-xl flex justify-center items-center">
-            <div className="flex flex-col w-full h-full">
-              <div className="flex justify-center items-center h-1/2 bg-slate-800 rounded-[8px]">
-                {submit ? (
-                  verdict === "human" ? (
-                    <div className="flex flex-col justify-center items-center">
-                      <FaUserTie className="my-4 text-white text-[100px]" />
-                      <p className="text-white font-bold text-4xl">
-                        From Human
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col justify-center items-center">
-                      <FaRobot className="my-4 text-white text-[100px]" />
-                      <p className="text-white font-bold text-4xl">From AI</p>
-                    </div>
-                  )
-                ) : (
-                  <p className="text-white font-semibold text-[18px]">
-                    Please upload your file for check
-                  </p>
-                )}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] justify-between h-1/2 pt-[20px]">
-                <div className="flex flex-col justify-center items-center h-full bg-slate-800 rounded-[8px]">
-                  <p className="text-slate-400 font-semibold text-[18px]">
-                    Quality
-                  </p>
+          <div className="h-full w-full max-w-full px-2 flex justify-center items-center">
+            <div className="p-[20px] h-[500px] w-full max-w-[550px] bg-slate-700 rounded-xl">
+              <div className="flex flex-col w-full h-full">
+                <div className="flex justify-center items-center h-1/2 bg-slate-800 rounded-[8px]">
                   {submit ? (
-                    quality ? (
-                      <div className="mt-4 flex flex-col justify-center items-center">
-                        <FaRegThumbsUp className="text-white text-[30px]" />
-                        <p className="text-white text-[20px]">Good</p>
+                    verdict === "human" ? (
+                      <div className="flex flex-col justify-center items-center">
+                        <FaUserTie className="my-4 text-white text-[100px]" />
+                        <p className="text-white font-bold text-4xl">
+                          From Human
+                        </p>
                       </div>
                     ) : (
-                      <div className="mt-4 flex flex-col justify-center items-center">
-                        <FaRegThumbsDown className="text-white text-[30px]" />
-                        <p className="text-white text-[20px]">Bad</p>
+                      <div className="flex flex-col justify-center items-center">
+                        <FaRobot className="my-4 text-white text-[100px]" />
+                        <p className="text-white font-bold text-4xl">From AI</p>
                       </div>
                     )
                   ) : (
-                    <p className="text-white text-[20px]">None</p>
+                    <p className="text-white font-semibold text-[18px]">
+                      Please upload your file for check
+                    </p>
                   )}
                 </div>
-                <div className="flex flex-col justify-center items-center h-full bg-slate-800 rounded-[8px]">
-                  <p className="text-slate-400 font-semibold text-[18px]">
-                    Nsfw
-                  </p>
-                  {submit ? (
-                    nsfw ? (
-                      <div className="mt-4 flex flex-col justify-center items-center">
-                        <FaCheck className="text-white text-[30px]" />
-                        <p className="text-white text-[20px]">Yes</p>
-                      </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] justify-between h-1/2 pt-[20px]">
+                  <div className="flex flex-col justify-center items-center h-full bg-slate-800 rounded-[8px]">
+                    <p className="text-slate-400 font-semibold text-[18px]">
+                      Quality
+                    </p>
+                    {submit ? (
+                      quality ? (
+                        <div className="mt-4 flex flex-col justify-center items-center">
+                          <FaRegThumbsUp className="text-white text-[30px]" />
+                          <p className="text-white text-[20px]">Good</p>
+                        </div>
+                      ) : (
+                        <div className="mt-4 flex flex-col justify-center items-center">
+                          <FaRegThumbsDown className="text-white text-[30px]" />
+                          <p className="text-white text-[20px]">Bad</p>
+                        </div>
+                      )
                     ) : (
-                      <div className="mt-4 flex flex-col justify-center items-center">
-                        <FaXmark className="text-white text-[30px]" />
-                        <p className="text-white text-[20px]">No</p>
-                      </div>
-                    )
-                  ) : (
-                    <p className="text-white text-[20px]">None</p>
-                  )}
+                      <p className="text-white text-[20px]">None</p>
+                    )}
+                  </div>
+                  <div className="flex flex-col justify-center items-center h-full bg-slate-800 rounded-[8px]">
+                    <p className="text-slate-400 font-semibold text-[18px]">
+                      Nsfw
+                    </p>
+                    {submit ? (
+                      nsfw ? (
+                        <div className="mt-4 flex flex-col justify-center items-center">
+                          <FaCheck className="text-white text-[30px]" />
+                          <p className="text-white text-[20px]">Yes</p>
+                        </div>
+                      ) : (
+                        <div className="mt-4 flex flex-col justify-center items-center">
+                          <FaXmark className="text-white text-[30px]" />
+                          <p className="text-white text-[20px]">No</p>
+                        </div>
+                      )
+                    ) : (
+                      <p className="text-white text-[20px]">None</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
           {/* Loading Indicator */}
           {loading && (
             <div className="absolute top-0 left-0 w-full h-lvh bg-gray-900 opacity-75 flex justify-center items-center">

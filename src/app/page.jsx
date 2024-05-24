@@ -9,9 +9,8 @@ function Home() {
   return (
     <>
       <div>
-      
-        <div className='flex justify-center items-center p-10' >
-          <Dragdrop className='p-16 mt-10 border border-neutral-700 rounded-xl' />
+        <div className='w-full flex justify-center items-center mt-5' >
+          <Dragdrop/>
         </div>
       </div>
 
