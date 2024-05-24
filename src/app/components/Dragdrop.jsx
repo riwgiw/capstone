@@ -11,12 +11,15 @@ import {
   FaRegThumbsDown,
   FaCheck,
 } from "react-icons/fa6";
-import { Container } from "postcss";
 import Cardcontainer from "./Cardcontainer";
+
+import { useSession } from "next-auth/react";
+
+import Nav from "./Nav";
 
 var axios = require("axios");
 
-function Dragdrop({ className }) {
+function Dragdrop() {
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
 
@@ -27,6 +30,9 @@ function Dragdrop({ className }) {
   const [submit, setSubmit] = useState(false);
 
   const [loading, setLoading] = useState(false);
+
+  const { data: session } = useSession();
+  console.log(session);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -127,8 +133,9 @@ function Dragdrop({ className }) {
   };
 
   return (
-    <>
-      <div className="flex justify-center items-center flex-col">
+    <div className="w-full flex flex-col">
+      <Nav session={session} />
+      <div className="mt-10 flex justify-center items-center flex-col">
         <form
           onSubmit={handleSubmit}
           method="post"
@@ -316,6 +323,7 @@ function Dragdrop({ className }) {
             </div>
           )}
         </form>
+        
         <div className="flex justify-center font-sans text-xl mt-10">
           try ai or not
         </div>
@@ -336,7 +344,7 @@ function Dragdrop({ className }) {
           Copyright 2024
         </footer>
       </div>
-    </>
+    </div>
   );
 }
 

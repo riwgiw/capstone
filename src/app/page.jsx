@@ -1,7 +1,4 @@
-import Image from "next/image";
-import Link from 'next/link';
 import Dragdrop from "./components/Dragdrop";
-import Login from "./components/Login";
 
 function Home() {
   
