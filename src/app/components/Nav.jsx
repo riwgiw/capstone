@@ -39,6 +39,7 @@ function Nav({ session }) {
         return;
       }
 
+
       router.refresh();
       setIsOpen(false);
     } catch (error) {
@@ -135,7 +136,7 @@ function Nav({ session }) {
                 ) : (
                   <div className="flex flex-row items-center">
                     <div className="px-4 py-2 text-xl text-white">
-                      Scores : {session?.user?.name}
+                      {session?.user?.name}
                     </div>
                     <a
                     onClick={() => signOut()}
