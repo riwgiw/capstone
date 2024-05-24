@@ -9,7 +9,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [isLoginForm, setIsLoginForm] = useState(true); // State to toggle between login and register form
+    const [isLoginForm, setIsLoginForm] = useState(true);
 
     const openPopup = () => setIsOpen(true);
     const closePopup = () => setIsOpen(false);
@@ -39,56 +39,74 @@ function Login() {
             <button onClick={openPopup}
                 className='flex text-white text-xl font-sans border border-white rounded-3xl px-4 py-2'>Login</button>
 
+
             {isOpen && (
-                <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white bg-opacity-95 rounded-lg p-8 shadow-md w-1/3">
-                        <Image 
+                <div className='fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center px-3'>
+                    <div className='bg-white bg-opacity-95 rounded-lg p-8 shadow-md w-[450px] lg:w-[500px]'>
+                    <button onClick={closePopup} className="w-full flex justify-end">X</button>
+                    <Image 
                         src={Logo}
                         alt='logo' 
-                        className='flex justify-center items-center w-32 mx-auto mb-4 rounded-md '/>
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>
-                            <input type="email" id="email" name="email" value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500" />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="username" className="block text-gray-700 font-bold mb-2">Username:</label>
-                            <input type="text" id="username" name="username" value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500" />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Password:</label>
-                            <input type="password" id="password" name="password" value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500" />
-                        </div>
-                        {isLoginForm ? null : (
+                        className='flex flex-col justify-center items-center w-32 mx-auto mb-4 rounded-md '/>
+                        {isLoginForm ? (
                             <>
-                                
-                                <div className="mb-4">
-                                    <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">Confirm Password:</label>
-                                    <input type="password" id="confirmPassword" name="confirmPassword" value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500" />
-                                </div>
+                                <h2 className='w-full flex justify-center text-3xl font-semibold mb-5'>Login</h2>
+                                <input
+                                    type="text"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="mt-4 block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <button className='mt-3 px-3 py-2 rounded bg-green-500 text-white' onClick={handleSubmit}>Submit</button>
+                            </>
+                        ) : (
+                            <>
+                                <h2 className='w-full flex justify-center text-3xl font-semibold mb-5'>Sign up</h2>
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    className="block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="mt-4 block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="mt-4 block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="mt-4 block w-full px-4 py-2 rounded-lg bg-gray-200 border border-gray-300 focus:outline-none focus:border-blue-500"
+                                />
+                                <button className='mt-3 px-3 py-2 rounded bg-green-500 text-white' onClick={handleSubmit}>Submit</button>
                             </>
                         )}
-                       
-                        <div className="mt-4 text-center">
-                            <button onClick={toggleForm} className="text-blue-500 hover:text-blue-700 focus:outline-none mb-4">
-                                {isLoginForm ? 'Register Instead' : 'Login Instead'}
-                            </button>
-                        </div>
-                        <div className="text-center">
-                            <button onClick={handleSubmit}
-                                className=" bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
-                            <button onClick={closePopup}
-                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Close</button>
-                        </div>
                         
-                    </div>
+                        <button className='ml-5 text-blue-500 hover:underline hover:underline-offset-2' onClick={toggleForm}>
+                            {isLoginForm ? "Don’t have an account yet? Signup." : 'Already have account? Log in.'}
+                        </button>
+                    </div> 
+                    
                 </div>
             )}
         </div>
