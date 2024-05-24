@@ -1,6 +1,8 @@
+"use client"
 import React from 'react';
 import './Nav.css';
 import Login from './Login';
+import { signOut } from 'next-auth/react';
 
 function Nav() {
   return (
@@ -12,8 +14,9 @@ function Nav() {
             <div className='mr-10'>Home</div>
             <div>Content</div>
           </div>
-          <div>
+          <div className='flex'>
             <Login></Login>
+            <a onClick={() => signOut()} className='px-4 py-2 rounded-3xl bg-red-500 text-white border text-xl'>Logout</a>
           </div>
         </div>
         <div className='flex-grow flex flex-col justify-center items-center'>
