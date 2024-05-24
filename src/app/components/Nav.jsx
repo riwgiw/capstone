@@ -18,7 +18,7 @@ function Nav() {
         </div>
         <div className='flex-grow flex flex-col justify-center items-center'>
           <div className='text-white text-3xl font-sans mb-4 m-10'>
-            VERIFICATION WITH AI DETECTION
+            VERIFICATION IMAGE WITH AI DETECTION
           </div>
           
         </div>

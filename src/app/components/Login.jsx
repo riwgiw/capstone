@@ -43,7 +43,8 @@ function Login() {
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white bg-opacity-95 rounded-lg p-8 shadow-md w-1/3">
                         <Image 
-                        src={Logo} 
+                        src={Logo}
+                        alt='logo' 
                         className='flex justify-center items-center w-32 mx-auto mb-4 rounded-md '/>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>
