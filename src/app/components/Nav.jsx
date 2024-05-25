@@ -150,7 +150,7 @@ function Nav({ session }) {
               </div>
 
               {isOpen && (
-                <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center px-3">
+                <div className="z-10 fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center px-3">
                   <div className="bg-white bg-opacity-95 rounded-lg p-8 shadow-md w-[450px] lg:w-[500px]">
                     <button
                       onClick={closePopup}

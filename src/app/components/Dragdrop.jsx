@@ -323,24 +323,28 @@ function Dragdrop() {
             </div>
           )}
         </form>
-        
-        <div className="flex justify-center font-sans text-xl mt-10">
-          try ai or not
-        </div>
-        <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
-          <div className="w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 grid gap-2 md:gap-3">
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-            <Cardcontainer />
-          </div>
-        </div>
-        <footer className=" relative top-10 bg-gray-800 text-white text-center py-2 h-32 w-screen flex items-center justify-center ">
+        {session && (
+          <>
+            <div className="flex justify-center font-sans text-xl mt-10">
+              try ai or not
+            </div>
+            <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
+              <div className="w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 grid gap-2 md:gap-3">
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+                <Cardcontainer />
+              </div>
+            </div>
+          </>
+        )}
+
+        <footer className="z-0 relative bottom-0 text-gray-800 text-center py-2 h-32 w-screen flex items-center justify-center ">
           Copyright 2024
         </footer>
       </div>
