@@ -139,9 +139,9 @@ function Dragdrop() {
         <form
           onSubmit={handleSubmit}
           method="post"
-          className="flex flex-col lg:flex-row max-w-[1000px] w-full"
+          className="flex flex-col max-w-[1000px] w-full items-center"
         >
-          <div className="px-3 w-full">
+          <div className="px-3 w-3/4">
             <div className="flex justify-center font-sans text-2xl font-bold">
               Upload your images
             </div>
