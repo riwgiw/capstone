@@ -85,9 +85,12 @@ function Dragdrop() {
     const formData = new FormData();
 
     files.forEach((file) => formData.append("file", file));
+    console.log(files);
     formData.append("upload_preset", "dejandkkv");
 
-    const URL = "https://api.cloudinary.com/v1_1/dejandkkv/image/upload";
+    
+
+    const URL = "http://localhost:5000/upload";
     try {
       const response = await fetch(URL, {
         method: "POST",
@@ -95,7 +98,7 @@ function Dragdrop() {
       });
       const data = await response.json();
 
-      console.log("data", data.url);
+      console.log("data", data);
 
       var imageInsert = JSON.stringify({
         object: data.url,
@@ -104,10 +107,12 @@ function Dragdrop() {
       var config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "https://api.aiornot.com/v1/reports/image",
+        url: "http://localhost:5000/reports/image",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdkMjc0M2EzLTc4NmItNDdhYS04NTg0LTMwZTU5ZGY3NGQ2MSIsInVzZXJfaWQiOiI3ZDI3NDNhMy03ODZiLTQ3YWEtODU4NC0zMGU1OWRmNzRkNjEiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjAuMH0.g84Y1ffU14iw1QWgP-alYYxRHZvuUOvSPIl3d052mLU",
+
+          // Authorization:
+          //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdkMjc0M2EzLTc4NmItNDdhYS04NTg0LTMwZTU5ZGY3NGQ2MSIsInVzZXJfaWQiOiI3ZDI3NDNhMy03ODZiLTQ3YWEtODU4NC0zMGU1OWRmNzRkNjEiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjAuMH0.g84Y1ffU14iw1QWgP-alYYxRHZvuUOvSPIl3d052mLU",
+          
           "Content-Type": "application/json",
           Accept: "application/json",
         },
@@ -115,16 +120,17 @@ function Dragdrop() {
       };
 
       const aiResponse = await axios(config);
-      const responseData = aiResponse.data;
+      const responseData = data;
       console.log(responseData);
+
       setVerdict(responseData.report.verdict);
       setQuality(responseData.facets.quality.is_detected);
       setNsfw(responseData.facets.nsfw.is_detected);
       setSubmit(true);
-      console.log(JSON.stringify(responseData));
-      console.log("Verdict", responseData.report.verdict);
-      console.log("Quality :", responseData.facets.quality.is_detected);
-      console.log("Nsfw :", responseData.facets.nsfw.is_detected);
+      // console.log(JSON.stringify(responseData));
+      // console.log("Verdict", responseData.report.verdict);
+      // console.log("Quality :", responseData.facets.quality.is_detected);
+      // console.log("Nsfw :", responseData.facets.nsfw.is_detected);
     } catch (error) {
       console.log(error);
     } finally {
