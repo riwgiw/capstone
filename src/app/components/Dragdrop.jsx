@@ -14,6 +14,9 @@ import {
 import Cardcontainer from "./Cardcontainer";
 
 import { useSession } from "next-auth/react";
+import photo1 from '../../../public/Imges/LOGO.png'
+import photo2 from '../components/bg-G.jpg'
+
 
 import Nav from "./Nav";
 
@@ -26,7 +29,11 @@ function Dragdrop() {
   const [verdict, setVerdict] = useState();
   const [quality, setQuality] = useState();
   const [nsfw, setNsfw] = useState();
-
+  const keepData = [
+    { id: 1, photo: photo1, types: true },
+    { id: 2, photo: photo2, types: true },
+    // เพิ่มข้อมูลตามต้องการ
+  ];
   const [submit, setSubmit] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -336,15 +343,9 @@ function Dragdrop() {
             </div>
             <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
               <div className="w-full grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 grid gap-2 md:gap-3">
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
-                <Cardcontainer />
+                {keepData.map((data) => (
+                  <Cardcontainer key={data.id} photo={data.photo} types={data.types} />
+                ))}
               </div>
             </div>
           </>
