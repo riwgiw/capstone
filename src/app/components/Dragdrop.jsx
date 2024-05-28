@@ -95,6 +95,23 @@ function Dragdrop() {
     // console.log(file);
     formData.append("upload_preset", "dejandkkv");
 
+    const URL_coudinary = "https://api.cloudinary.com/v1_1/dejandkkv/image/upload";
+    try {
+      const response_coudinary = await fetch(URL_coudinary, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data_coudinary = await response_coudinary.json();
+      console.log("data_coudinary", data_coudinary);
+
+      const imageInsert = JSON.stringify({
+        object: data_coudinary.url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     const URL = "http://localhost:5000/upload";
     try {
       const response = await fetch(URL, {
@@ -103,11 +120,13 @@ function Dragdrop() {
       });
 
       const data = await response.json();
-      // console.log("data", data);
+      
 
       const imageInsert = JSON.stringify({
         object: data.url,
       });
+
+      console.log("data", data.url);
 
       // const config = {
       //   method: "post",
