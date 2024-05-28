@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import defaultPic from '../../../public/Imges/LOGO.png';
+// import defaultPic from '../../../public/Imges/LOGO.png';
 import aiPic from '../../../public/Imges/Ai.png';
 import HumenPic from '../../../public/Imges/Humen.png';
 
 const Cardcontainer = ({ photo, types }) => {
   const [correctModalOpen, setCorrectModalOpen] = useState(false);
   const [wrongModalOpen, setWrongModalOpen] = useState(false);
-
+  console.log();
   const handleCorrectModalOpen = () => {
     setCorrectModalOpen(true);
   }
@@ -23,7 +23,7 @@ const Cardcontainer = ({ photo, types }) => {
 
   return (
     <div className="max-w-sm rounded-lg shadow-lg overflow-hidden bg-none relative">
-      <Image className="w-full h-64 object-cover" src={photo || defaultPic} alt="Card Image" />
+      <Image className="w-full h-64 object-cover" src={photo } alt="Card Image" />
       <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-4 p-2">
         {types ? (
           <>
