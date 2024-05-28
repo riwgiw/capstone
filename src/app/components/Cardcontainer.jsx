@@ -22,6 +22,7 @@ const Cardcontainer = ({ photo, types }) => {
   return (
     <div className="max-w-sm rounded-lg shadow-lg overflow-hidden bg-none relative">
       <Image className="w-full h-64 object-cover" src={photo} width={100} height={100} alt="Card Image" />
+      {/* <img src={photo}  alt="" /> */}
       <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-4 p-2">
         {types ? (
           <>

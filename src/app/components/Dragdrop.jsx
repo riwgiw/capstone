@@ -5,9 +5,7 @@ import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { FaXmark, FaRobot, FaUserTie } from "react-icons/fa6";
 import Cardcontainer from "./Cardcontainer";
-
 import { useSession } from "next-auth/react";
-
 import Nav from "./Nav";
 
 const axios = require("axios");
@@ -21,6 +19,7 @@ function Dragdrop() {
   const [submit, setSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [gameData, setGameData] = useState(null);
+  const [dataLoading, setDataLoading] = useState(true); // New state for data loading
 
   useEffect(() => {
     const fetchGameData = async () => {
@@ -35,6 +34,8 @@ function Dragdrop() {
         setGameData(data);
       } catch (error) {
         console.error("Error fetching game data:", error);
+      } finally {
+        setDataLoading(false); // Stop loading when data is fetched
       }
     };
 
@@ -297,17 +298,27 @@ function Dragdrop() {
             </div>
             <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
-                {gameData.map((data) => (
-                  <Cardcontainer
-                    key={data.id}
-                    photo={data.url}
-                    types={data.types} // Make sure 'types' is a valid field in your data
-                  />
-                ))}
+                {!dataLoading && gameData ? (
+                  gameData.map((data ,idx) => (
+                    <Cardcontainer
+                      key={idx}
+                      photo={data.url}
+                      types={data.types} // Make sure 'types' is a valid field in your data
+                    />
+                  ))
+                ) : (
+                  <p className="text-center w-full">Loading game data...</p>
+                )}
               </div>
             </div>
           </>
         )}
+
+        {/* <Image
+          src="http://res.cloudinary.com/dejandkkv/image/upload/v1716927264/%E0%B9%80%E0%B8%AA%E0%B8%B7%E0%B8%AD_os0qsx.png"
+          width={100}
+          height={100}
+        /> */}
 
         <footer className="z-0 relative bottom-0 text-gray-800 text-center py-2 h-32 w-screen flex items-center justify-center">
           Copyright 2024
