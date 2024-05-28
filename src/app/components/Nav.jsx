@@ -20,7 +20,6 @@ function Nav({ session }) {
 
   const router = useRouter();
 
-
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
 
@@ -38,7 +37,6 @@ function Nav({ session }) {
         setError("Invalid credentials");
         return;
       }
-
 
       router.refresh();
       setIsOpen(false);
@@ -139,13 +137,12 @@ function Nav({ session }) {
                       {session?.user?.name}
                     </div>
                     <a
-                    onClick={() => signOut()}
-                    className="px-4 py-2 rounded-3xl bg-red-500 text-white border text-xl"
-                  >
-                    Logout
-                  </a>
+                      onClick={() => signOut()}
+                      className="px-4 py-2 rounded-3xl bg-red-500 text-white border text-xl"
+                    >
+                      Logout
+                    </a>
                   </div>
-                  
                 )}
               </div>
 

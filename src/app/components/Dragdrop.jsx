@@ -7,9 +7,6 @@ import {
   FaXmark,
   FaRobot,
   FaUserTie,
-  FaRegThumbsUp,
-  FaRegThumbsDown,
-  FaCheck,
 } from "react-icons/fa6";
 import Cardcontainer from "./Cardcontainer";
 
@@ -33,10 +30,9 @@ function Dragdrop() {
   const keepData = [
     { id: 1, photo: photo1, types: true },
     { id: 2, photo: photo2, types: true },
-];
+  ];
 
   const { data: session } = useSession();
-  // console.log(session);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -63,12 +59,6 @@ function Dragdrop() {
     };
   }, [file]);
 
-  // useEffect(() => {
-  //   if (submit && resultRef) {
-  //     document.getElementById('ypred').scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [submit]);
-
   const removeFile = () => {
     setFile(null);
   };
@@ -90,69 +80,45 @@ function Dragdrop() {
     setLoading(true); // Start loading
 
     const formData = new FormData();
-
     formData.append("file", file);
-    // console.log(file);
     formData.append("upload_preset", "dejandkkv");
 
     const URL_coudinary = "https://api.cloudinary.com/v1_1/dejandkkv/image/upload";
+    const URL = "http://localhost:5000/upload";
+
     try {
       const response_coudinary = await fetch(URL_coudinary, {
         method: "POST",
         body: formData,
       });
-
       const data_coudinary = await response_coudinary.json();
-      console.log("data_coudinary", data_coudinary);
 
-      const imageInsert = JSON.stringify({
-        object: data_coudinary.url,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    const URL = "http://localhost:5000/upload";
-    try {
       const response = await fetch(URL, {
         method: "POST",
         body: formData,
       });
-
-      const data = await response.json();
       
+      const data = await response.json();
 
-      const imageInsert = JSON.stringify({
-        object: data.url,
+      const upload_mogos = await fetch("http://localhost:3000/api/upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: data_coudinary.url,
+          result: data.report.verdict,
+        }),
       });
 
-      console.log("data", data.url);
-
-      // const config = {
-      //   method: "post",
-      //   maxBodyLength: Infinity,
-      //   url: "http://localhost:5000/reports/image",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //   },
-      //   data: imageInsert,
-      // };
-
-      // const aiResponse = await axios(config);
-
-      const responseData = data;
-      // console.log(responseData);
-
-      setVerdict(responseData.report.verdict);
-      setQuality(responseData.facets.quality.is_detected);
-      setNsfw(responseData.facets.nsfw.is_detected);
+      setVerdict(data.report.verdict);
+      setQuality(data.facets.quality.is_detected);
+      setNsfw(data.facets.nsfw.is_detected);
       setSubmit(true);
 
-      console.log('verdict', verdict);
       document.getElementById('ypred').scrollIntoView({ behavior: "smooth" });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false); // Set loading state to false after completion
     }
