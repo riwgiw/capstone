@@ -3,16 +3,10 @@
 import React, { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
-import {
-  FaXmark,
-  FaRobot,
-  FaUserTie,
-} from "react-icons/fa6";
+import { FaXmark, FaRobot, FaUserTie } from "react-icons/fa6";
 import Cardcontainer from "./Cardcontainer";
 
 import { useSession } from "next-auth/react";
-import photo1 from "../../../public/Imges/LOGO.png";
-import photo2 from "../components/bg-G.jpg";
 
 import Nav from "./Nav";
 
@@ -26,18 +20,37 @@ function Dragdrop() {
   const [nsfw, setNsfw] = useState();
   const [submit, setSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [gameData, setGameData] = useState(null);
 
-  const keepData = [
-    { id: 1, photo: photo1, types: true },
-    { id: 2, photo: photo2, types: true },
-  ];
+  useEffect(() => {
+    const fetchGameData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/getGame", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setGameData(data);
+      } catch (error) {
+        console.error("Error fetching game data:", error);
+      }
+    };
+
+    fetchGameData();
+  }, []);
+
+  console.log(gameData);
 
   const { data: session } = useSession();
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       const newFile = acceptedFiles[0];
-      setFile(Object.assign(newFile, { preview: URL.createObjectURL(newFile) }));
+      setFile(
+        Object.assign(newFile, { preview: URL.createObjectURL(newFile) })
+      );
     }
 
     if (rejectedFiles?.length) {
@@ -83,7 +96,8 @@ function Dragdrop() {
     formData.append("file", file);
     formData.append("upload_preset", "dejandkkv");
 
-    const URL_coudinary = "https://api.cloudinary.com/v1_1/dejandkkv/image/upload";
+    const URL_coudinary =
+      "https://api.cloudinary.com/v1_1/dejandkkv/image/upload";
     const URL = "http://localhost:5000/upload";
 
     try {
@@ -97,7 +111,7 @@ function Dragdrop() {
         method: "POST",
         body: formData,
       });
-      
+
       const data = await response.json();
 
       const upload_mogos = await fetch("http://localhost:3000/api/upload", {
@@ -116,7 +130,7 @@ function Dragdrop() {
       setNsfw(data.facets.nsfw.is_detected);
       setSubmit(true);
 
-      document.getElementById('ypred').scrollIntoView({ behavior: "smooth" });
+      document.getElementById("ypred").scrollIntoView({ behavior: "smooth" });
     } catch (error) {
       console.error(error);
     } finally {
@@ -238,7 +252,10 @@ function Dragdrop() {
               ))}
             </ul>
           </div>
-          <div className="h-full w-full max-w-full px-2 flex justify-center items-center" id='ypred'>
+          <div
+            className="h-full w-full max-w-full px-2 flex justify-center items-center"
+            id="ypred"
+          >
             <div className="p-[20px] h-[250px] w-full max-w-[550px] bg-slate-700 rounded-xl">
               <div className="flex flex-col w-full h-full">
                 <div className="flex justify-center items-center h-[250px] bg-slate-800 rounded-[8px]">
@@ -280,11 +297,11 @@ function Dragdrop() {
             </div>
             <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
-                {keepData.map((data) => (
+                {gameData.map((data) => (
                   <Cardcontainer
                     key={data.id}
-                    photo={data.photo}
-                    types={data.types}
+                    photo={data.url}
+                    types={data.types} // Make sure 'types' is a valid field in your data
                   />
                 ))}
               </div>
