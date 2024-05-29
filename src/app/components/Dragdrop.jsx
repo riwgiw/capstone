@@ -8,6 +8,10 @@ import Cardcontainer from "./Cardcontainer";
 import { useSession } from "next-auth/react";
 import Nav from "./Nav";
 
+import firstimage from "../../../public/Imges/first.png";
+import secondimage from "../../../public/Imges/second.png";
+import thirdimage from "../../../public/Imges/third.png";
+
 const axios = require("axios");
 
 function Dragdrop() {
@@ -21,6 +25,11 @@ function Dragdrop() {
   const [gameData, setGameData] = useState(null);
   const [userData, setUserData] = useState(null);
   const [dataLoading, setDataLoading] = useState(true); // New state for data loading
+  const [first, setFirst] = useState(null);
+  const [second, setSecond] = useState(null);
+  const [third, setThird] = useState(null);
+
+  console.log(userData);
 
   useEffect(() => {
     const fetchGameData = async () => {
@@ -49,7 +58,16 @@ function Dragdrop() {
           },
         });
         const data = await response.json();
-        setUserData(data);
+
+        const sortedData = data.sort((a, b) => b.scores - a.scores);
+        setUserData(sortedData);
+        const firstUserData = sortedData[0];
+        const secondUserData = sortedData[1];
+        const thirdUserData = sortedData[2];
+
+        setFirst(firstUserData);
+        setSecond(secondUserData);
+        setThird(thirdUserData);
       } catch (error) {
         console.error("Error fetching game data:", error);
       } finally {
@@ -301,23 +319,41 @@ function Dragdrop() {
             </div>
           </div>
           <p className="font-bold text-3xl mt-5">Top Scores</p>
-          
-          <div className="my-10 w-full h-[200px] flex whitespace-nowrap flex-row">
+
+          <div className="mt-20 max-w-full w-full h-[240px] flex flex-row justify-center items-center">
             {!dataLoading && userData ? (
-              userData.map((data) => (
-                <div className="min-w-[200px] min-h-[200px] rounded-full bg-black flex flex-col justify-center items-center text-white text-[20px] relative mr-5">
+              <>
                 
-                <p className="uppercase font-bold text-[80px] mb-14">r</p>
-                <div className="absolute flex flex-col justify-center items-center bottom-3 text-[16px] text-[#8A8A8A] font-medium">
-                  <p>{data.name}</p>
-                  <p>scores: {data.scores}</p>
+                <div className="min-w-[120px] min-h-[120px] sm:min-w-[160px] sm:min-h-[160px] md:min-w-[200px] md:min-h-[200px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative ">
+                  <Image src={secondimage} alt="second" className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"/>
+                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">{second.name.charAt(0)}</p>
+                  <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
+                    <p>{second.name}</p>
+                    <p>scores: {second.scores}</p>
+                  </div>
                 </div>
-              </div>
-              ))
-            ):(
+
+                <div className="min-w-[160px] min-h-[160px] sm:min-w-[200px] sm:min-h-[200px] md:min-w-[240px] md:min-h-[240px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative mx-1 sm:mx-4 md:mx-7">
+                  <Image src={firstimage} alt="first" className="absolute w-[120px] sm:w-[140px] md:w-[170px] -top-6 sm:-top-9 md:-top-10"/>
+                  <p className="uppercase font-bold text-[40px] sm:text-[70px] md:text-[100px] mb-7 sm:mb-10 md:mb-14">{first.name.charAt(0)}</p>
+                  <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
+                    <p>{first.name}</p>
+                    <p>scores: {first.scores}</p>
+                  </div>
+                </div>
+
+                <div className="min-w-[120px] min-h-[120px] sm:min-w-[160px] sm:min-h-[160px] md:min-w-[200px] md:min-h-[200px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative ">
+                  <Image src={thirdimage} alt="third" className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"/>
+                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">{third.name.charAt(0)}</p>
+                  <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
+                    <p>{third.name}</p>
+                    <p>scores: {third.scores}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
               <p className="text-center w-full">Loading user data...</p>
             )}
-              
           </div>
 
           {/* Loading Indicator */}
@@ -337,10 +373,10 @@ function Dragdrop() {
                 {!dataLoading && gameData ? (
                   gameData.map((data) => (
                     <Cardcontainer
-                        key={data._id} // Use the actual _id as the key
-                        id={data._id} // Pass the actual _id as the id prop
-                        photo={data.url}
-                        result={data.result}
+                      key={data._id} // Use the actual _id as the key
+                      id={data._id} // Pass the actual _id as the id prop
+                      photo={data.url}
+                      result={data.result}
                     />
                   ))
                 ) : (
