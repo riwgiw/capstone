@@ -10,6 +10,16 @@ const gameSchema = new Schema(
             type: String,
             require: true,
         },
+        // aiclick: {
+        //     type: Number,
+        //     require: false,
+        //     default: 0
+        // },
+        // humanclick: {
+        //     type: Number,
+        //     require: false,
+        //     default: 0
+        // },
     },
     {timestamps: true}
 )

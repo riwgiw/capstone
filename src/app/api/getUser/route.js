@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
-import Game from "../../../../models/game";
+import User from "../../../../models/user";
 
 export async function POST(req) {
     try {
@@ -8,10 +8,10 @@ export async function POST(req) {
         await connectMongoDB();
 
         
-        const games = await Game.find();
+        const users = await User.find();
         
 
-        return NextResponse.json(games, { status: 200 });
+        return NextResponse.json(users, { status: 200 });
 
     } catch (error) {
         console.error("Error occurred while fetching data from MongoDB:", error);

@@ -19,6 +19,7 @@ function Dragdrop() {
   const [submit, setSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [gameData, setGameData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [dataLoading, setDataLoading] = useState(true); // New state for data loading
 
   useEffect(() => {
@@ -39,10 +40,26 @@ function Dragdrop() {
       }
     };
 
-    fetchGameData();
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/getUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching game data:", error);
+      } finally {
+        setDataLoading(false); // Stop loading when data is fetched
+      }
+    };
 
-  console.log(gameData);
+    fetchGameData();
+    fetchUserData();
+  }, []);
 
   const { data: session } = useSession();
 
@@ -283,6 +300,25 @@ function Dragdrop() {
               </div>
             </div>
           </div>
+          <p className="font-bold text-3xl mt-5">Top Scores</p>
+          
+          <div className="my-10 w-full h-[200px] flex whitespace-nowrap flex-row">
+            {!dataLoading && userData ? (
+              userData.map((data) => (
+                <div className="min-w-[200px] min-h-[200px] rounded-full bg-black flex flex-col justify-center items-center text-white text-[20px] relative mr-5">
+                
+                <p className="uppercase font-bold text-[80px] mb-14">r</p>
+                <div className="absolute flex flex-col justify-center items-center bottom-3 text-[16px] text-[#8A8A8A] font-medium">
+                  <p>{data.name}</p>
+                  <p>scores: {data.scores}</p>
+                </div>
+              </div>
+              ))
+            ):(
+              <p className="text-center w-full">Loading user data...</p>
+            )}
+              
+          </div>
 
           {/* Loading Indicator */}
           {loading && (
@@ -293,17 +329,18 @@ function Dragdrop() {
         </form>
         {session && (
           <>
-            <div className="flex justify-center font-sans text-xl mt-10">
+            <div className="flex justify-center font-bold text-3xl mt-10">
               Try AI or not
             </div>
             <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
                 {!dataLoading && gameData ? (
-                  gameData.map((data ,idx) => (
+                  gameData.map((data) => (
                     <Cardcontainer
-                      key={idx}
-                      photo={data.url}
-                      types={data.types} // Make sure 'types' is a valid field in your data
+                        key={data._id} // Use the actual _id as the key
+                        id={data._id} // Pass the actual _id as the id prop
+                        photo={data.url}
+                        result={data.result}
                     />
                   ))
                 ) : (
@@ -313,12 +350,6 @@ function Dragdrop() {
             </div>
           </>
         )}
-
-        {/* <Image
-          src="http://res.cloudinary.com/dejandkkv/image/upload/v1716927264/%E0%B9%80%E0%B8%AA%E0%B8%B7%E0%B8%AD_os0qsx.png"
-          width={100}
-          height={100}
-        /> */}
 
         <footer className="z-0 relative bottom-0 text-gray-800 text-center py-2 h-32 w-screen flex items-center justify-center">
           Copyright 2024
