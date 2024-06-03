@@ -77,7 +77,7 @@ function Dragdrop() {
 
     fetchGameData();
     fetchUserData();
-  }, []);
+  }, [loading]);
 
   const { data: session } = useSession();
 
@@ -323,10 +323,15 @@ function Dragdrop() {
           <div className="mt-20 max-w-full w-full h-[240px] flex flex-row justify-center items-center">
             {!dataLoading && userData ? (
               <>
-                
                 <div className="min-w-[120px] min-h-[120px] sm:min-w-[160px] sm:min-h-[160px] md:min-w-[200px] md:min-h-[200px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative ">
-                  <Image src={secondimage} alt="second" className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"/>
-                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">{second.name.charAt(0)}</p>
+                  <Image
+                    src={secondimage}
+                    alt="second"
+                    className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"
+                  />
+                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">
+                    {second.name.charAt(0)}
+                  </p>
                   <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
                     <p>{second.name}</p>
                     <p>scores: {second.scores}</p>
@@ -334,8 +339,14 @@ function Dragdrop() {
                 </div>
 
                 <div className="min-w-[160px] min-h-[160px] sm:min-w-[200px] sm:min-h-[200px] md:min-w-[240px] md:min-h-[240px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative mx-1 sm:mx-4 md:mx-7">
-                  <Image src={firstimage} alt="first" className="absolute w-[120px] sm:w-[140px] md:w-[170px] -top-6 sm:-top-9 md:-top-10"/>
-                  <p className="uppercase font-bold text-[40px] sm:text-[70px] md:text-[100px] mb-7 sm:mb-10 md:mb-14">{first.name.charAt(0)}</p>
+                  <Image
+                    src={firstimage}
+                    alt="first"
+                    className="absolute w-[120px] sm:w-[140px] md:w-[170px] -top-6 sm:-top-9 md:-top-10"
+                  />
+                  <p className="uppercase font-bold text-[40px] sm:text-[70px] md:text-[100px] mb-7 sm:mb-10 md:mb-14">
+                    {first.name.charAt(0)}
+                  </p>
                   <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
                     <p>{first.name}</p>
                     <p>scores: {first.scores}</p>
@@ -343,8 +354,14 @@ function Dragdrop() {
                 </div>
 
                 <div className="min-w-[120px] min-h-[120px] sm:min-w-[160px] sm:min-h-[160px] md:min-w-[200px] md:min-h-[200px] rounded-full bg-slate-900 flex flex-col justify-center items-center text-white text-[20px] relative ">
-                  <Image src={thirdimage} alt="third" className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"/>
-                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">{third.name.charAt(0)}</p>
+                  <Image
+                    src={thirdimage}
+                    alt="third"
+                    className="absolute w-[80px] sm:w-[100px] md:w-[140px] -top-4 sm:-top-8 md:-top-12"
+                  />
+                  <p className="uppercase font-bold text-[30px] sm:text-[50px] md:text-[80px] mb-7 sm:mb-10 md:mb-14">
+                    {third.name.charAt(0)}
+                  </p>
                   <div className="absolute flex flex-col justify-center items-center bottom-3 text-[12px] sm:text-[14px] md:text-[16px] text-[#8A8A8A] font-medium">
                     <p>{third.name}</p>
                     <p>scores: {third.scores}</p>
@@ -368,8 +385,8 @@ function Dragdrop() {
             <div className="flex justify-center font-bold text-3xl mt-10">
               Try AI or not
             </div>
-            <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[768px] px-10">
-              <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
+            <div className="w-full flex items-start justify-start mt-10 flex-wrap max-w-[1280px] px-10">
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
                 {!dataLoading && gameData ? (
                   gameData.map((data) => (
                     <Cardcontainer

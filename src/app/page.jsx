@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <div>
-        <div className='w-full flex justify-center items-center mt-5' >
+        <div className='w-full flex justify-center items-center mt-0' >
           <Dragdrop/>
         </div>
       </div>
