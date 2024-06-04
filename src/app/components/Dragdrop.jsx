@@ -33,6 +33,13 @@ function Dragdrop() {
 
   useEffect(() => {
     const fetchGameData = async () => {
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      };
       try {
         const response = await fetch("http://localhost:3000/api/getGame", {
           method: "POST",
@@ -41,7 +48,8 @@ function Dragdrop() {
           },
         });
         const data = await response.json();
-        setGameData(data);
+        const shuffledData = shuffleArray(data);
+        setGameData(shuffledData);
       } catch (error) {
         console.error("Error fetching game data:", error);
       } finally {
